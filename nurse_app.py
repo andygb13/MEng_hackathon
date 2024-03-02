@@ -221,7 +221,7 @@ def log_journal():
             # Store journal entry and selected emotions in a CSV file
             file_path = "journal_entries.csv"
             header = ["Emotions", "Journal Entry", "Public"]
-            new_entry = [", ".join(selected_options), journal_entry, "No"]
+            new_entry = [", ".join(selected_options), journal_entry, ""]
             if not os.path.exists(file_path):
                 with open(file_path, mode='w', newline='') as file:
                     writer = csv.writer(file)
@@ -234,7 +234,7 @@ def log_journal():
             # Store only the selected emotions in a CSV file
             file_path = "journal_entries.csv"
             header = ["Emotions", "Public"]
-            new_entry = [", ".join(selected_options), "No"]
+            new_entry = [", ".join(selected_options), ""]
             if not os.path.exists(file_path):
                 with open(file_path, mode='w', newline='') as file:
                     writer = csv.writer(file)
@@ -249,21 +249,32 @@ def share_experience():
 
     lock_button = st.button("🔒 Lock (Private)")
     post_button = st.button("📬 Post to Forum")
+    public_status = ""
 
     # Check the clicked button
+    # Check the clicked button
     if lock_button:
-        # # Insert the locked experience into the database
-        # cursor.execute("INSERT INTO experiences (content, posted) VALUES (%s, %s)", (experience, False))
-        # conn.commit()
-        # st.info("Your experience is private and saved in your history.")
-        pass
-
+        public_status = "No"
+        st.info("Your experience is private and saved in your history.")
+        
     elif post_button:
-        # Insert the experience into the database if the user chooses to post
-        # cursor.execute("INSERT INTO experiences (content, posted) VALUES (%s, %s)", (experience, True))
-        # conn.commit()
-        # st.success("Your experience has been posted to the forum!")   
-        pass
+        public_status = "Yes"
+        st.success("Your experience has been posted to the forum!")
+
+    # Open the journal_entries.csv file and update the 'Public' status for the last entry
+    file_path = "journal_entries.csv"
+    if os.path.exists(file_path):
+        with open(file_path, mode='r', newline='') as file:
+            reader = csv.reader(file)
+            entries = list(reader)
+
+            # Update the 'Public' status for the last entry
+            if len(entries) > 1:
+                entries[-1][-1] = public_status
+
+        with open(file_path, mode='w', newline='') as file:
+            writer = csv.writer(file)
+            writer.writerows(entries)
 
 # Main function to control navigation between pages
 def main():
