@@ -7,14 +7,77 @@ import pandas as pd
 
 # Dictionary to store user information (for demonstration purposes)
 user_info = {}
+state = "hello"
+
+# Function to render register page
+# to do: Add functionalities for existing users
+def render_register():
+    st.title("Register")
+    username = st.text_input("Username")
+    password = st.text_input("Password", type="password")
+    if st.button("Register"):
+        if username in user_info:
+            st.error("Username already exists. Please choose a different one.")
+        else:
+            user_info[username] = password
+            st.success("Registration successful! Please proceed to login.")
+
+
+# Dictionary to store user information (for demonstration purposes)
+user_info = {}
 signup_completed = False
+
 
 # Function to log emotions
 def log_emotions():
     st.title("Log Emotions")
     # Implement logic to log emotions here
+
+# Function to log emotions
+def recommended_exercises(emotions_list):
+    # Implement logic to recommended exercises here
+
+    placeholder = st.empty()
+
+    recommend_list = []
     
+
+    if "Anxious" or "Powerless" or "Overwhelmed" or "Bored" or "Jealous" or "Annoyed" in emotions_list:
+        recommend_list.append("Box Breathing Exercise")
+    if "Lonely" or "Hurt" or "Disappointed" or "Ashamed" or "Excluded" or "Guilty" in emotions_list:
+        recommend_list.append("Mindfulness Audio Recording")
+    if "Scared" in emotions_list:
+        recommend_list.append("Scared")
+
+    # Default
+    if st.session_state.page == 0:
+        i=0
+        with placeholder.container():
+            st.title("We Recommend")
+        for exercise in recommend_list:
+            i+=1
+            with st.chat_message("user"):
+                st.write(exercise)
+                st.button('Go to Exercise', key=i, on_click=nextpage) 
+    # Box Breathing 
+    elif st.session_state.page == 1:
+        multi = '''Before starting the breathing pattern, adopt a comfortable sitting position and place the tip of the tongue on the tissue right behind the top front teeth.To use the 4-7-8 technique, focus on the following breathing pattern:
+
+●	emptying the lungs of air
+
+●	breathing in quietly through the nose for 4 seconds
+
+●	holding the breath for a count of 7 seconds
+
+●	exhaling forcefully through the mouth, pursing the lips, and making a “whoosh” sound for 8 seconds
+
+●	repeating the cycle up to 4 times
+'''
+        with placeholder.container():
+            st.markdown(multi)
     
+def nextpage(): st.session_state.page = 1
+
 # Function to check mental health resources
 def check_resources():
     st.title("Mental Health Resources")
@@ -308,6 +371,8 @@ def main():
     st.sidebar.title("Navigation")
     page_options = ["Home", "Login", "Register", "Selection", "Log Emotions", "Check Resources", "Feed", "Log Journal", "Experience"]
     selected_page = st.sidebar.selectbox("Go to", page_options)
+    if "page" not in st.session_state:
+        st.session_state.page = 0
 
     if selected_page == "Home":
         render_home()
@@ -552,6 +617,8 @@ def render_emotion_selection_page():
 
     # if next page = send list
 
+
+    st.session_state.page = 0
 
 if __name__ == "__main__":
     main()
