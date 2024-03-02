@@ -432,6 +432,124 @@ def render_waiver():
         # Uncomment line below to render the main page once the waiver has been successfully signed.
         # render_mainpage()
 
+def render_home():
+    # Define the button labels
+    button_labels = ["LOG AN EMOTION", "CHECK RESOURCES", "BROWSE FEED", "USER ACCOUNT"]
+
+    # Display the buttons
+    button_clicked = None
+    for label in button_labels:
+        if st.button(label):
+            button_clicked = label
+
+    # Perform action based on button clicked
+    if button_clicked == "LOG AN EMOTION":
+        st.write("You clicked LOG AN EMOTION!")
+    elif button_clicked == "CHECK RESOURCES":
+        st.write("You clicked CHECK RESOURCES!")
+    elif button_clicked == "BROWSE FEED":
+        st.write("You clicked BROWSE FEED!")
+
+def render_emotion_selection_page():
+
+    st.write("# Select Your Emotions")
+
+    st.markdown("<h2 style= 'color: #FF81C8;'>Happy</h2", unsafe_allow_html=True)
+    caring = st.checkbox("Caring")
+    grateful = st.checkbox("Grateful")
+    excited = st.checkbox("Excited")
+
+    st.markdown("<h2 style= 'color: #FF7D92;'>Loved</h2", unsafe_allow_html=True)
+    respected = st.checkbox("Respected")
+    valued = st.checkbox("Valued")
+    accepted = st.checkbox("Accepted")
+
+    st.markdown("<h2 style= 'color: #FF9775;'>Confident</h2", unsafe_allow_html=True)
+    brave = st.checkbox("Brave")
+    hopeful = st.checkbox("Hopeful")
+    powerful = st.checkbox("Powerful")
+
+    st.markdown("<h2 style= 'color: #FFC56A;'>Playful</h2", unsafe_allow_html=True)
+    creative = st.checkbox("Creative")
+    curious = st.checkbox("Curious")
+    affectionate = st.checkbox("Affectionate")
+
+    st.markdown("<h2 style= 'color: #2ED5A4;'>Embarrassed</h2", unsafe_allow_html=True)
+    ashamed = st.checkbox("Ashamed")
+    excluded = st.checkbox("Excluded")
+    guilty = st.checkbox("Guilty")
+
+    st.markdown("<h2 style= 'color: #5DCFFC;'>Angry</h2", unsafe_allow_html=True)
+    bored = st.checkbox("Bored")
+    jealous = st.checkbox("Jealous")
+    annoyed = st.checkbox("Annoyed")
+
+    st.markdown("<h2 style= 'color: #869DFF;'>Scared</h2", unsafe_allow_html=True)
+    anxious = st.checkbox("Anxious")
+    powerless = st.checkbox("Powerless")
+    overwhelmed = st.checkbox("Overwhelmed")
+
+    st.markdown("<h2 style= 'color: #D18AFF;'>Sad</h2", unsafe_allow_html=True)
+    lonely = st.checkbox("Lonely")
+    hurt = st.checkbox("Hurt")
+    disappointed = st.checkbox("Disappointed")
+
+
+    next_page = st.button("NEXT PAGE")
+
+
+    selected_emotions = []
+    if caring:
+        selected_emotions.append("Caring")
+    if grateful:
+        selected_emotions.append("Grateful")
+    if excited:
+        selected_emotions.append("Excited")
+    if respected:
+        selected_emotions.append("Respected")
+    if valued:
+        selected_emotions.append("Valued")
+    if accepted:
+        selected_emotions.append("Accepted")
+    if brave:
+        selected_emotions.append("Brave")
+    if hopeful:
+        selected_emotions.append("Hopeful")
+    if powerful:
+        selected_emotions.append("Powerful")
+    if creative:
+        selected_emotions.append("Creative")
+    if curious:
+        selected_emotions.append("Curious")
+    if affectionate:
+        selected_emotions.append("Affectionate")
+    if ashamed:
+        selected_emotions.append("Ashamed")
+    if excluded:
+        selected_emotions.append("Excluded")
+    if guilty:
+        selected_emotions.append("Guilty")
+    if bored:
+        selected_emotions.append("Bored")
+    if jealous:
+        selected_emotions.append("Jealous")
+    if annoyed:
+        selected_emotions.append("Annoyed")
+    if anxious:
+        selected_emotions.append("Anxious")
+    if powerless:
+        selected_emotions.append("Powerless")
+    if overwhelmed:
+        selected_emotions.append("Overwhelmed")
+    if lonely:
+        selected_emotions.append("Lonely")
+    if hurt:
+        selected_emotions.append("Hurt")
+    if disappointed:
+        selected_emotions.append("Disappointed")
+
+    # if next page = send list
+
 
 if __name__ == "__main__":
     main()
