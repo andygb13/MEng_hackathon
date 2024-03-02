@@ -1,4 +1,6 @@
 import streamlit as st
+import csv
+import os
 import mysql.connector
 
 # Dictionary to store user information (for demonstration purposes)
@@ -64,10 +66,30 @@ def log_journal():
     skip_entry = st.checkbox("Skip entering journal entry")
     if st.button("Submit"):
         if not skip_entry:
-            # Store journal entry and selected emotions in database or file
+            # Store journal entry and selected emotions in a CSV file
+            file_path = "journal_entries.csv"
+            header = ["Emotions", "Journal Entry"]
+            new_entry = [", ".join(selected_options), journal_entry]
+            if not os.path.exists(file_path):
+                with open(file_path, mode='w', newline='') as file:
+                    writer = csv.writer(file)
+                    writer.writerow(header)
+            with open(file_path, mode='a', newline='') as file:
+                writer = csv.writer(file)
+                writer.writerow(new_entry)
             st.success("Journal entry and emotions logged successfully!")
         else:
-            # Store only the selected emotions in database or file
+            # Store only the selected emotions in a CSV file
+            file_path = "journal_entries.csv"
+            header = ["Emotions"]
+            new_entry = [", ".join(selected_options)]
+            if not os.path.exists(file_path):
+                with open(file_path, mode='w', newline='') as file:
+                    writer = csv.writer(file)
+                    writer.writerow(header)
+            with open(file_path, mode='a', newline='') as file:
+                writer = csv.writer(file)
+                writer.writerow(new_entry)
             st.success("Emotions logged successfully!")
 
 # Main function to control navigation between pages
