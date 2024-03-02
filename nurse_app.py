@@ -325,6 +325,8 @@ def main():
         display_feed()
     elif selected_page == "Experience":
         share_experience()    
+    elif selected_page == "Experience":
+        render_selection()   
 
 # Function to render register page
 def render_login():
@@ -355,7 +357,7 @@ def render_home():
 
     # Add your logo image with a fixed size of 300x300 pixels and center it
     logo_path = "Logo.png"  # Replace with the actual file name of your logo image
-    st.image(logo_path, caption="", width=150, use_column_width=False, output_format='auto', )
+    st.image(logo_path, caption="", width=150, use_column_width=False, output_format='auto' )
 
     st.header("Your Well Being Is Important To Us")
     
@@ -432,7 +434,7 @@ def render_waiver():
         # Uncomment line below to render the main page once the waiver has been successfully signed.
         # render_mainpage()
 
-def render_home():
+def render_selection():
     # Define the button labels
     button_labels = ["LOG AN EMOTION", "CHECK RESOURCES", "BROWSE FEED", "USER ACCOUNT"]
 
