@@ -287,7 +287,7 @@ def main():
     elif selected_page == "Login":
         render_login()
     elif selected_page == "Register":
-        log_emotions()
+        render_register()
     elif selected_page == "Log Emotions":
         log_emotions()
     elif selected_page == "Check Resources":
