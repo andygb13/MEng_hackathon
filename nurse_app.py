@@ -306,7 +306,7 @@ def share_experience():
 # Main function to control navigation between pages
 def main():
     st.sidebar.title("Navigation")
-    page_options = ["Home", "Login", "Register", "Log Emotions", "Check Resources", "Feed", "Log Journal", "Experience"]
+    page_options = ["Home", "Login", "Register", "Selection", "Log Emotions", "Check Resources", "Feed", "Log Journal", "Experience"]
     selected_page = st.sidebar.selectbox("Go to", page_options)
 
     if selected_page == "Home":
