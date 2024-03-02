@@ -185,6 +185,7 @@ def display_feed():
         st.write(f"**Emotions:** {row['Emotions']}")
         st.write(f"**Journal Entry:** {row['Journal Entry']}")
         st.write("---")
+
 # Function to prompt user to write a journal entry
 # Function to prompt user to write a journal entry
 def log_journal():
@@ -284,6 +285,13 @@ def main():
         share_experience()    
 
 # Function to render register page
+def render_login():
+    global signup_completed
+
+    st.title("Login")
+    name = st.text_input("Email")
+    password = st.text_input("Password", type="password")
+
 def render_register():
     global signup_completed
 
