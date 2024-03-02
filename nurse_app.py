@@ -20,6 +20,19 @@ def check_resources():
     
     st.divider()
 
+    st.header("Revisit Your Past Logs")
+    logs = pd.read_csv('./journal_entries.csv')
+    entry = 1
+    for row in logs.itertuples(index=False):
+        emotion, desc = row
+        st.subheader("Entry "+ str(entry) + ":")
+        st.write("Your emotion was: " + emotion)
+        st.write("Your log: "+ desc)
+        entry+=1
+        
+
+    st.divider()
+
 
     st.header("Start With a Breathing Exercise!")
     with st.expander("Breathing Exercise"):
