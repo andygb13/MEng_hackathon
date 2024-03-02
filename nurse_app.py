@@ -1,8 +1,6 @@
 import streamlit as st
 import csv
 import os
-import mysql.connector
-
 
 # Dictionary to store user information (for demonstration purposes)
 user_info = {}
@@ -81,10 +79,31 @@ def log_journal():
                 writer.writerow(new_entry)
             st.success("Emotions logged successfully!")
 
+def share_experience():
+    st.title("Share Your Experience")
+
+    lock_button = st.button("🔒 Lock (Private)")
+    post_button = st.button("📬 Post to Forum")
+
+    # Check the clicked button
+    if lock_button:
+        # # Insert the locked experience into the database
+        # cursor.execute("INSERT INTO experiences (content, posted) VALUES (%s, %s)", (experience, False))
+        # conn.commit()
+        # st.info("Your experience is private and saved in your history.")
+        pass
+
+    elif post_button:
+        # Insert the experience into the database if the user chooses to post
+        # cursor.execute("INSERT INTO experiences (content, posted) VALUES (%s, %s)", (experience, True))
+        # conn.commit()
+        # st.success("Your experience has been posted to the forum!")   
+        pass
+
 # Main function to control navigation between pages
 def main():
     st.sidebar.title("Navigation")
-    page_options = ["Register", "Log Emotions", "Check Resources", "Feed", "Log Journal"]
+    page_options = ["Register", "Log Emotions", "Check Resources", "Feed", "Log Journal", "Experience"]
     selected_page = st.sidebar.selectbox("Go to", page_options)
 
     if selected_page == "Register":
@@ -97,6 +116,8 @@ def main():
         log_journal()
     elif selected_page == "Feed":
         display_feed()
+    elif selected_page == "Experience":
+        share_experience()    
 
 # Function to render register page
 def render_register():
@@ -111,8 +132,27 @@ def render_register():
     licence = st.text_input("Licence #")
     if st.button("Sign Up"):
         if password == confirm_password:
-            # Store user information (for demonstration purposes)
-            user_info[name] = {'email': email, 'password': password}
+            # Store user information in a dictionary
+            user_info = {
+                'Name': name,
+                'Occupation': occupation,
+                'Email': email,
+                'Password': password,
+                'Licence': licence
+            }
+
+            # Write user information to CSV file
+            with open('user_info.csv', 'a', newline='') as csvfile:
+                fieldnames = ['Name', 'Occupation', 'Email', 'Password', 'Licence']
+                writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+
+                # Write header if file is empty
+                if csvfile.tell() == 0:
+                    writer.writeheader()
+
+                # Write user data to CSV file
+                writer.writerow(user_info)
+
             st.success("Sign up successful! Please proceed to login.")
             signup_completed = True
             # Redirect to waiver page
