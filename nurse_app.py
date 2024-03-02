@@ -1,21 +1,9 @@
 import streamlit as st
-import mysql.connector
+# import mysql.connector
 
 # Dictionary to store user information (for demonstration purposes)
 user_info = {}
-
-# Function to render register page
-# to do: Add functionalities for existing users
-def render_register():
-    st.title("Register")
-    username = st.text_input("Username")
-    password = st.text_input("Password", type="password")
-    if st.button("Register"):
-        if username in user_info:
-            st.error("Username already exists. Please choose a different one.")
-        else:
-            user_info[username] = password
-            st.success("Registration successful! Please proceed to login.")
+signup_completed = False
 
 # Function to log emotions
 def log_emotions():
@@ -46,6 +34,62 @@ def main():
         check_resources()
     elif selected_page == "Feed":
         display_feed()
+
+# Function to render register page
+def render_register():
+    global signup_completed
+
+    st.title("Sign Up")
+    name = st.text_input("Name")
+    occupation = st.text_input("Occupation")
+    email = st.text_input("Email")
+    password = st.text_input("Password", type="password")
+    confirm_password = st.text_input("Confirm Password", type="password")
+    licence = st.text_input("Licence #")
+    if st.button("Sign Up"):
+        if password == confirm_password:
+            # Store user information (for demonstration purposes)
+            user_info[name] = {'email': email, 'password': password}
+            st.success("Sign up successful! Please proceed to login.")
+            signup_completed = True
+            # Redirect to waiver page
+            render_waiver()
+        else:
+            st.error("Passwords do not match. Please try again.")
+
+# Function to render waiver page
+def render_waiver():
+    st.title("Waiver Page")
+    st.write("Please read and agree to the terms below:")
+
+    # Display waiver text
+    waiver_text = """
+    As a user of this mental health application tailored for nurses, I acknowledge the following:
+    
+    1. The mental health app provides resources and tools designed to support my mental well-being as a nurse.
+    
+    2. I understand that the app does not substitute professional medical advice, diagnosis, or treatment.
+    
+    3. Any information shared or discussions held within the app are strictly confidential and must not be shared outside the app.
+    
+    4. I agree to take full responsibility for any actions taken or decisions made based on the information provided by the app.
+    
+    5. I acknowledge that participation in any activities or discussions within the app is voluntary, and I have the right to withdraw at any time.
+    
+    6. I understand that the app may collect anonymized data for research and improvement purposes, ensuring my privacy is maintained.
+    
+    By checking the box below, I confirm that I have read, understood, and agree to abide by the terms stated above. I acknowledge that failure to comply with these terms may result in the termination of my access to the app.
+    """
+    st.write(waiver_text)
+
+    # Checkbox for agreement
+    agreed = st.checkbox("I agree to the terms stated above.")
+
+    if agreed:
+        st.write("Thank you for agreeing to the terms.")
+        # Uncomment line below to render the main page once the waiver has been successfully signed.
+        # render_mainpage()
+
 
 if __name__ == "__main__":
     main()
