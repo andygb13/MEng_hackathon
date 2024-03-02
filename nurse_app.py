@@ -324,6 +324,8 @@ def render_login():
     st.title("Login")
     name = st.text_input("Email")
     password = st.text_input("Password", type="password")
+    if st.button("Login"):
+        pass
 
 def render_home():
     st.title("Nurse Wellness WebApp")
