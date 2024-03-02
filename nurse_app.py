@@ -12,6 +12,7 @@ def log_emotions():
     st.title("Log Emotions")
     # Implement logic to log emotions here
     
+    
 # Function to check mental health resources
 def check_resources():
     st.title("Mental Health Resources")
