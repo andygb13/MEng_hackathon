@@ -32,6 +32,43 @@ def display_feed():
     st.title("User Experiences Feed")
     # Implement logic to display user experiences feed here
 
+# Function to prompt user to write a journal entry
+def log_journal():
+    st.title("Log Emotions & Reflective Journal Entry")
+    
+    st.write("Select what contributed to your emotions:")
+    # Updated options for contributing factors
+    options = [
+        "Conflict with a coworker/patient/family member",
+        "Medication/procedure Error",
+        "Imposter syndrome",
+        "Code Event",
+        "Patient death",
+        "Verbal or physical abuse from patient/family members",
+        "Tiredness/ exhaustion",
+        "High patient:nurse ratio",
+        "Poor patient outcomes",
+        "Moral/Ethical distress",
+        "Lack of Sleep",
+        "Missed Breaks",
+        "Unsafe assignments",
+        "Staff shortages",
+        "Conflict with management"
+    ]
+    selected_options = st.multiselect("Select Option(s)", options)
+    
+    st.write("Reflect on the selected emotion and write a journal entry below:")
+    journal_entry = st.text_area("Journal Entry", height=200)
+    
+    skip_entry = st.checkbox("Skip entering journal entry")
+    if st.button("Submit"):
+        if not skip_entry:
+            # Store journal entry and selected emotions in database or file
+            st.success("Journal entry and emotions logged successfully!")
+        else:
+            # Store only the selected emotions in database or file
+            st.success("Emotions logged successfully!")
+
 # Main function to control navigation between pages
 def main():
     st.sidebar.title("Navigation")
