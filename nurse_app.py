@@ -33,6 +33,7 @@ def display_feed():
     # Implement logic to display user experiences feed here
 
 # Function to prompt user to write a journal entry
+# Function to prompt user to write a journal entry
 def log_journal():
     st.title("Log Emotions & Reflective Journal Entry")
     
@@ -72,7 +73,7 @@ def log_journal():
 # Main function to control navigation between pages
 def main():
     st.sidebar.title("Navigation")
-    page_options = ["Register", "Log Emotions", "Check Resources", "Feed"]
+    page_options = ["Register", "Log Emotions", "Check Resources", "Feed", "Log Journal"]
     selected_page = st.sidebar.selectbox("Go to", page_options)
 
     if selected_page == "Register":
@@ -81,6 +82,8 @@ def main():
         log_emotions()
     elif selected_page == "Check Resources":
         check_resources()
+    elif selected_page == "Log Journal":
+        log_journal()
     elif selected_page == "Feed":
         display_feed()
 
