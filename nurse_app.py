@@ -170,7 +170,6 @@ def check_resources():
 
 
 
-
 # Function to display feed of user experiences
 def display_feed():
     st.title("User Experiences Feed")
