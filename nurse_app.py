@@ -325,7 +325,24 @@ def render_login():
     name = st.text_input("Email")
     password = st.text_input("Password", type="password")
     if st.button("Login"):
-        pass
+        file_path = "user_info.csv"
+        if os.path.exists(file_path):
+            with open(file_path, mode='r', newline='') as file:
+                reader = csv.DictReader(file)
+                entries = list(reader)
+                for entry in entries:
+                    if entry['Email'] == name and entry['Password'] == password:
+                        st.success("Login successful!")
+                        return  # Added return to exit the function after successful login
+
+                # If no matching entry is found
+                st.error("Login failed. Please check your email and password.")
+        else:
+            st.error("Database file not found. Please sign up first.")
+
+
+
+
 
 def render_home():
     st.title("Nurse Wellness WebApp")
