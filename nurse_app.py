@@ -176,10 +176,19 @@ def check_resources():
 # Function to display feed of user experiences
 def display_feed():
     st.title("User Experiences Feed")
-    # Implement logic to display user experiences feed here
+    # Timestamp,Emotions,Journal Entry,Public
+    # 2024-03-02 13:19:56,"Code Event, Imposter syndrome",I am testing,No
 
     # Load the data from the CSV file
     data = pd.read_csv('journal_entries.csv')
+
+    data = data[data['Public'] == 'Yes']
+    
+    # Convert 'Timestamp' column to datetime format
+    data['Timestamp'] = pd.to_datetime(data['Timestamp'])
+
+    # Sort DataFrame by 'Timestamp' column
+    data = data.sort_values(by='Timestamp')
 
     # Display posts
     for index, row in data.iterrows():
