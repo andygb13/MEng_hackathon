@@ -297,14 +297,7 @@ def render_login():
     password = st.text_input("Password", type="password")
 
 def render_home():
-    st.title("Nurse Wellness WebApp")
-
-    # Add your logo image with a fixed size of 300x300 pixels and center it
-    logo_path = "Logo.png"  # Replace with the actual file name of your logo image
-    st.image(logo_path, caption="", width=150, use_column_width=False, output_format='auto', )
-
-    st.header("Your Well Being Is Important To Us")
-    
+    pass
 def render_register():
     global signup_completed
 
