@@ -325,7 +325,7 @@ def main():
         display_feed()
     elif selected_page == "Experience":
         share_experience()    
-    elif selected_page == "Experience":
+    elif selected_page == "Selection":
         render_selection()   
 
 # Function to render register page
