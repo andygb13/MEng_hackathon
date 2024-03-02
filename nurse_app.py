@@ -272,9 +272,9 @@ def main():
     selected_page = st.sidebar.selectbox("Go to", page_options)
 
     if selected_page == "Home":
-        render_register()
+        render_home()
     elif selected_page == "Login":
-        log_emotions()
+        render_login()
     elif selected_page == "Register":
         log_emotions()
     elif selected_page == "Log Emotions":
@@ -296,6 +296,8 @@ def render_login():
     name = st.text_input("Email")
     password = st.text_input("Password", type="password")
 
+def render_home():
+    pass
 def render_register():
     global signup_completed
 
