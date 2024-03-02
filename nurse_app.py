@@ -1,4 +1,5 @@
 import streamlit as st
+import csv
 # import mysql.connector
 
 # Dictionary to store user information (for demonstration purposes)
@@ -48,8 +49,27 @@ def render_register():
     licence = st.text_input("Licence #")
     if st.button("Sign Up"):
         if password == confirm_password:
-            # Store user information (for demonstration purposes)
-            user_info[name] = {'email': email, 'password': password}
+            # Store user information in a dictionary
+            user_info = {
+                'Name': name,
+                'Occupation': occupation,
+                'Email': email,
+                'Password': password,
+                'Licence': licence
+            }
+
+            # Write user information to CSV file
+            with open('user_info.csv', 'a', newline='') as csvfile:
+                fieldnames = ['Name', 'Occupation', 'Email', 'Password', 'Licence']
+                writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+
+                # Write header if file is empty
+                if csvfile.tell() == 0:
+                    writer.writeheader()
+
+                # Write user data to CSV file
+                writer.writerow(user_info)
+
             st.success("Sign up successful! Please proceed to login.")
             signup_completed = True
             # Redirect to waiver page
