@@ -1,6 +1,7 @@
 import streamlit as st
 import csv
 import os
+from datetime import datetime
 import base64
 import pandas as pd
 
@@ -231,10 +232,12 @@ def log_journal():
     skip_entry = st.checkbox("Skip entering journal entry")
     if st.button("Submit"):
         if not skip_entry:
+            # Generate timestamp
+            timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
             # Store journal entry and selected emotions in a CSV file
             file_path = "journal_entries.csv"
-            header = ["Emotions", "Journal Entry", "Public"]
-            new_entry = [", ".join(selected_options), journal_entry, ""]
+            header = ["Timestamp", "Emotions", "Journal Entry", "Public"]
+            new_entry = [timestamp, ", ".join(selected_options), journal_entry, "No"]
             if not os.path.exists(file_path):
                 with open(file_path, mode='w', newline='') as file:
                     writer = csv.writer(file)
@@ -244,10 +247,12 @@ def log_journal():
                 writer.writerow(new_entry)
             st.success("Journal entry and emotions logged successfully!")
         else:
+            # Generate timestamp
+            timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
             # Store only the selected emotions in a CSV file
             file_path = "journal_entries.csv"
-            header = ["Emotions", "Public"]
-            new_entry = [", ".join(selected_options), ""]
+            header = ["Timestamp", "Emotions", "Public"]
+            new_entry = [timestamp, ", ".join(selected_options), "No"]
             if not os.path.exists(file_path):
                 with open(file_path, mode='w', newline='') as file:
                     writer = csv.writer(file)
