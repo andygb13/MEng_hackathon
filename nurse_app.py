@@ -221,7 +221,7 @@ def log_journal():
             # Store journal entry and selected emotions in a CSV file
             file_path = "journal_entries.csv"
             header = ["Emotions", "Journal Entry", "Public"]
-            new_entry = [", ".join(selected_options), journal_entry, "No"]
+            new_entry = [", ".join(selected_options), journal_entry, ""]
             if not os.path.exists(file_path):
                 with open(file_path, mode='w', newline='') as file:
                     writer = csv.writer(file)
@@ -234,7 +234,7 @@ def log_journal():
             # Store only the selected emotions in a CSV file
             file_path = "journal_entries.csv"
             header = ["Emotions", "Public"]
-            new_entry = [", ".join(selected_options), "No"]
+            new_entry = [", ".join(selected_options), ""]
             if not os.path.exists(file_path):
                 with open(file_path, mode='w', newline='') as file:
                     writer = csv.writer(file)
