@@ -2,6 +2,7 @@ import streamlit as st
 import csv
 import os
 import base64
+import pandas as pd
 
 # Dictionary to store user information (for demonstration purposes)
 user_info = {}
@@ -176,6 +177,14 @@ def display_feed():
     st.title("User Experiences Feed")
     # Implement logic to display user experiences feed here
 
+    # Load the data from the CSV file
+    data = pd.read_csv('journal_entries.csv')
+
+    # Display posts
+    for index, row in data.iterrows():
+        st.write(f"**Emotions:** {row['Emotions']}")
+        st.write(f"**Journal Entry:** {row['Journal Entry']}")
+        st.write("---")
 # Function to prompt user to write a journal entry
 # Function to prompt user to write a journal entry
 def log_journal():
